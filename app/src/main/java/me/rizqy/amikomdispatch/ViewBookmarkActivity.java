@@ -13,16 +13,12 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.rizqy.amikomdispatch.models.BookmarkItem;
-import me.rizqy.amikomdispatch.models.NewsItem;
 
-public class ViewNewsActivity extends AppCompatActivity {
-    NewsItem item;
+public class ViewBookmarkActivity extends AppCompatActivity {
+    BookmarkItem item;
 
     @BindView(R.id.title) TextView tvTitle;
     @BindView(R.id.contentWebView) WebView wvContent;
@@ -38,7 +34,7 @@ public class ViewNewsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (getIntent().getExtras() != null) {
-            item = (NewsItem) getIntent().getSerializableExtra("item");
+            item = (BookmarkItem) getIntent().getSerializableExtra("item");
 
             if (item != null) {
 //                getSupportActionBar().setTitle(item.getTitle());
@@ -65,7 +61,7 @@ public class ViewNewsActivity extends AppCompatActivity {
             }
         });
 
-        wvContent.loadUrl("http://amikom-dispatch.rizqy.me/content/"+item.getId().toString());
+        wvContent.loadUrl("http://amikom-dispatch.rizqy.me/content/"+item.getOriId().toString());
     }
 
     @Override
@@ -81,7 +77,7 @@ public class ViewNewsActivity extends AppCompatActivity {
                 bookmarkItem();
                 Toast.makeText(this, "Info berhasil dibookmark.", Toast.LENGTH_LONG).show();
                 break;
-            
+
             case R.id.action_share:
                 shareItem();
                 break;
@@ -91,9 +87,9 @@ public class ViewNewsActivity extends AppCompatActivity {
     }
 
     private void bookmarkItem() {
-        Long timestamp = System.currentTimeMillis()/1000;
-        BookmarkItem bookmarkedItem = new BookmarkItem(item.getId(), item.getHash(), item.getTitle(), item.getUrl(), item.getDate(), timestamp);
-        bookmarkedItem.save();
+//        Long timestamp = System.currentTimeMillis()/1000;
+//        BookmarkItem bookmarkedItem = new BookmarkItem(item.getId(), item.getHash(), item.getTitle(), item.getUrl(), item.getDate(), timestamp);
+//        bookmarkedItem.save();
     }
 
     private void shareItem() {
